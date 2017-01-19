@@ -16,7 +16,14 @@ cabal-version:       >=1.10
 library
   hs-source-dirs:      src
   exposed-modules:     Lib
+                     , Board
+                     , Moves
+                     , Rules
+                     , Game
+                     , Settings
+                     , Player
   build-depends:       base >= 4.7 && < 5
+                     , mtl
   default-language:    Haskell2010
 
 executable tictactoe-exe
@@ -33,6 +40,7 @@ test-suite tictactoe-test
   main-is:             Spec.hs
   build-depends:       base
                      , tictactoe
+                     , hspec
   ghc-options:         -threaded -rtsopts -with-rtsopts=-N
   default-language:    Haskell2010
 
