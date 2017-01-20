@@ -2,6 +2,7 @@ module UISpec where
 
 import Test.Hspec
 import UI 
+import Mocks ( spyMock )
 
 main :: IO ()
 main = hspec spec
