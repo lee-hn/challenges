@@ -16,20 +16,20 @@ data MovesData = GameState {
 
 lastMove :: MovesData -> Maybe Int
 lastMove (GameState []) = Nothing
-lastMove (GameState allMoves) = Just $ last allMoves
+lastMove (GameState moves) = Just $ last moves
 
 addMove :: Int -> MovesData -> MovesData
-addMove move (GameState allMoves) = (GameState $ move : allMoves)
+addMove move (GameState moves) = (GameState $ moves ++ [move])
 
 lastPlayer :: MovesData -> Maybe Int
-lastPlayer (GameState allMoves)
-    | length allMoves == 0 = Nothing
-    | even $ length allMoves = Just 1
-    | odd $ length allMoves = Just 0
+lastPlayer (GameState moves)
+    | length moves == 0 = Nothing
+    | even $ length moves = Just 1
+    | odd $ length moves = Just 0
 
 playerMoves :: Int -> MovesData -> [Int]
-playerMoves player (GameState allMoves)
-    | player == 0 = [allMoves !! n | n <- moveIndices, even n]
-    | player == 1 = [allMoves !! n | n <- moveIndices, odd n]
-  where moveIndices = [0..length allMoves - 1]
+playerMoves player (GameState moves)
+    | player == 0 = [moves !! n | n <- moveIndices, even n]
+    | player == 1 = [moves !! n | n <- moveIndices, odd n]
+  where moveIndices = [0..length moves - 1]
 
