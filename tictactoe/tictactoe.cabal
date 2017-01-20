@@ -23,6 +23,7 @@ library
                      , Settings
                      , Player
                      , Computer
+                     , Minimax
                      , Human
                      , UI
   build-depends:       base >= 4.7 && < 5
