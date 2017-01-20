@@ -5,14 +5,10 @@ module Settings
     , playerTwo
     ) where
 
-import Moves ( MovesData(GameState) )
+import Player ( PlayerClass )
 
-import Player
-    ( PlayerClass
-    , PlayerTypeData(Computer, Human, Mock)
-    )
-
-data PlayerData = Players {
-                    playerOne :: PlayerTypeData
-                  , playerTwo :: PlayerTypeData
-                  } deriving (Show, Eq)
+data PlayerData one two = Players {
+                            playerOne :: one,
+                            playerTwo :: two 
+                          }
+                        deriving (Show, Eq)

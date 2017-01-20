@@ -22,6 +22,8 @@ library
                      , Game
                      , Settings
                      , Player
+                     , Computer
+                     , Human
                      , UI
   build-depends:       base >= 4.7 && < 5
                      , mtl

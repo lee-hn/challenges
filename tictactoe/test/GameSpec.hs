@@ -5,11 +5,12 @@ import Game
 import Board ( BoardData(Rows) )
 import Moves ( MovesData(GameState) )
 import Rules
-    ( GameData(Game)
+    ( 
+      GameData(Game)
     , OutcomeData(PlayerOneWin, PlayerTwoWin, Draw)
     )
 import Settings ( PlayerData(Players) )
-import Player ( PlayerTypeData(Mock) )
+import Mocks ( MockPlayerData(MockPlayer) )
 
 main :: IO ()
 main = hspec spec
@@ -21,7 +22,7 @@ spec = do
   let newGame = GameState []
   let finishedGame = GameState [4, 2, 5, 1, 6, 0]
   let unfinishedGame = GameState [4, 2, 5, 1, 6]
-  let players = Players Mock Mock
+  let players = Players MockPlayer MockPlayer
 
   describe "endGame" $ do
     it "gives result if Player One wins" $ do

@@ -20,19 +20,19 @@ import Moves
     , addMove
     , lastPlayer
     )
-import Settings
-    (
+import Settings 
+    ( 
       PlayerData(Players)
     , playerOne
     , playerTwo
     )
 import Player
     (
-      PlayerTypeData(Computer, Human, Mock)
+      PlayerClass
     , makeMove
     )
 
-runGame :: GameData -> PlayerData -> String
+runGame :: (PlayerClass one, PlayerClass two) => GameData -> (PlayerData one two) -> String
 runGame game players
     | outcome game == Continue = do
         let newMove = nextMove game players
@@ -49,7 +49,7 @@ endGame gameOutcome
     | gameOutcome == PlayerTwoWin = "Player Two wins"
     | gameOutcome == Draw = "Draw"
 
-nextMove :: GameData -> PlayerData -> Int
+nextMove :: (PlayerClass one, PlayerClass two) => GameData -> (PlayerData one two) -> Int
 nextMove game players
     | player == 0 = makeMove (playerOne players) game
     | player == 1 = makeMove (playerTwo players) game
