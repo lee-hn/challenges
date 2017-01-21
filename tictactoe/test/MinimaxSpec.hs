@@ -27,7 +27,7 @@ spec = do
 
     it "scores 0 if the move results in a draw" $ do
       let game = Game board almostDrawGame
-      shouldBe (scoreMove 8 game) 0 
+      shouldBe (scoreMove 8 game) 0
 
     it "scores -1 if the move results in a loss" $ do
       let game = Game board almostLossGame
@@ -46,16 +46,24 @@ spec = do
       let game = Game board newGame
       shouldBe (possibleMoves game) [0..8]
 
-    it "returns empty spaces if some moves have been played" $ do
+    it "returns empty spaces in if some moves have been played" $ do
       let game = Game board (GameState [1, 3, 5, 7])
       shouldBe (possibleMoves game) [0, 2, 4, 6, 8]
 
   describe "scorePossibleMoves" $ do
-    it "returns list with score for one space left to play" $ do
+    it "returns scores for one possible move left to play" $ do
       let game = Game board almostWinGame
-      shouldBe (scorePossibleMoves game) [1]
+      shouldBe (scorePossibleMoves game) [(2, 1)]
 
-    it "returns list with scores for two spaces left to play" $ do
+    it "returns scores for two possible moves left to play" $ do
       let game = Game board almostLossGame
-      shouldBe (scorePossibleMoves game) [1, -1]
+      shouldBe (scorePossibleMoves game) [(6, 1), (8, -1)]
 
+  describe "chooseBestMove" $ do
+    it "chooses best move when one move has max score" $ do
+      let moveScores = [(6, -1), (7, 0), (8, 1)]
+      shouldBe (chooseBestMove moveScores) (8, 1)
+
+    it "chooses first move when multiple moves have max score" $ do
+      let moveScores = [(6, -1), (7, 1), (8, 1)]
+      shouldBe (chooseBestMove moveScores) (7, 1)

@@ -5,8 +5,8 @@ description:         Please see README.md
 homepage:            https://github.com/lee-hn/challenges/tree/master/tictactoe#readme
 license:             BSD3
 license-file:        LICENSE
-author:              Hana Lee 
-maintainer:          hana@8thlight.com 
+author:              Hana Lee
+maintainer:          hana@8thlight.com
 copyright:           2017 (c) Hana Lee
 category:            Game
 build-type:          Simple
@@ -28,6 +28,7 @@ library
                      , UI
   build-depends:       base >= 4.7 && < 5
                      , mtl
+                     , containers
   default-language:    Haskell2010
 
 executable tictactoe-exe
