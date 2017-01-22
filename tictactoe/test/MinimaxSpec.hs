@@ -64,6 +64,6 @@ spec = do
       let moveScores = [(6, -1), (7, 0), (8, 1)]
       shouldBe (chooseBestMove moveScores) (8, 1)
 
-    it "chooses first move when multiple moves have max score" $ do
+    it "chooses one of the best moves when multiple moves have max score" $ do
       let moveScores = [(6, -1), (7, 1), (8, 1)]
-      shouldBe (chooseBestMove moveScores) (7, 1)
+      shouldBe (elem (chooseBestMove moveScores) [(7, 1), (8, 1)]) True

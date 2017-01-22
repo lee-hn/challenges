@@ -29,4 +29,4 @@ spec = do
 
     it "can make a move at the beginning of a game" $ do
       let game = Game board newGame
-      shouldBe (makeMove computer game) 0
+      shouldBe (elem (makeMove computer game) [0..8]) True  
