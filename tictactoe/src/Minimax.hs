@@ -29,7 +29,6 @@ import Board
     , boardSpaces
     )
 import Data.List
-import qualified Data.Map as Map
 import System.Random 
 
 scoreMove :: Int -> GameData -> Int
@@ -62,9 +61,9 @@ chooseBestMove :: [(Int, Int)] -> (Int, Int)
 chooseBestMove moveScores
     | numBestMoves == 1 = head bestMoves
     | otherwise = pickRandomMove bestMoves 
-  where moveScoresMap = Map.fromList moveScores
-        bestScore = maximum $ snd $ unzip moveScores
-        bestMoves = Map.toList $ Map.filter (== bestScore) moveScoresMap
+  where bestScore = maximum $ snd $ unzip moveScores
+        bestMoves = [moveScore | moveScore <- moveScores,
+                                 snd moveScore == bestScore]
         numBestMoves = length bestMoves
     
 pickRandomMove :: [(Int, Int)] -> (Int, Int)
