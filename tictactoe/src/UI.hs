@@ -6,6 +6,7 @@ module UI
     , displayMessage
     , getUserInput
     , displayPrompt
+    , promptForMove
     , displayError
     , displayGame
     , convertGameToString
@@ -35,6 +36,7 @@ import Errors
     )
 import Data.List
 import Data.List.Split
+import Data.Char
 import Data.Maybe
 
 class Monad monad => MonadUI monad where
@@ -55,6 +57,13 @@ displayPrompt :: MonadUI monad => String -> monad String
 displayPrompt prompt = do
     writeLine prompt
     readLine
+
+promptForMove :: MonadUI monad => monad (Maybe Int)
+promptForMove = do
+    move <- (displayPrompt "Please enter the number of the space where you want to make a move")
+    if all isDigit move
+        then return $ Just (read move :: Int)
+        else return $ Nothing
 
 displayError :: MonadUI monad => ErrorData -> monad ()
 displayError error

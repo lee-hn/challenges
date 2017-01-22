@@ -6,4 +6,4 @@ module Errors
 data ErrorData = InvalidSpaceError
                | OccupiedSpaceError
                | NotANumberError
-               deriving (Show, Eq)
+               deriving (Show, Eq, Enum)

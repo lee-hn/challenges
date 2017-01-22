@@ -52,6 +52,24 @@ spec = do
       shouldBe output "prompt"
       shouldBe input "response"
 
+  describe "promptForMove" $ do
+    it "sends a prompt for a move and receives move as an integer" $ do
+      let fixture = def {
+          _writeLine = \line -> tell line
+        , _readLine = return "4"
+      }
+      let (input, output) = evalTestFixture promptForMove fixture
+      shouldBe output "Please enter the number of the space where you want to make a move"
+      shouldBe input (Just 4)
+
+    it "returns an error if input move cannot be read as an integer" $ do
+      let fixture = def {
+          _writeLine = \line -> tell line
+        , _readLine = return "not an integer"
+      }
+      let (input, output) = evalTestFixture promptForMove fixture
+      shouldBe input Nothing
+
   describe "displayError" $ do
     it "sends invalid space error message to output" $ do
       let errorMessage = "That space does not exist on the board"
