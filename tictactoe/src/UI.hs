@@ -6,6 +6,7 @@ module UI
     , displayMessage
     , getUserInput
     , displayPrompt
+    , displayError
     , displayGame
     , convertGameToString
     , labelSpace
@@ -27,6 +28,10 @@ import Board
       BoardData(Rows)
     , boardDimension
     , boardSpaces
+    )
+import Errors
+    (
+      ErrorData(InvalidSpaceError, OccupiedSpaceError, NotANumberError)
     )
 import Data.List
 import Data.List.Split
@@ -50,6 +55,12 @@ displayPrompt :: MonadUI monad => String -> monad String
 displayPrompt prompt = do
     writeLine prompt
     readLine
+
+displayError :: MonadUI monad => ErrorData -> monad ()
+displayError error
+    | error == InvalidSpaceError = displayMessage "That space does not exist on the board"
+    | error == OccupiedSpaceError = displayMessage "That space is already occupied"
+    | error == NotANumberError = displayMessage "That is not a number"
 
 displayGame :: MonadUI monad => GameData -> monad ()
 displayGame game = displayMessage gameString

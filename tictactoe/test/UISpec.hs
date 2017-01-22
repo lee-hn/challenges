@@ -7,6 +7,7 @@ import UI
 import Board ( BoardData(Rows) )
 import Moves ( MovesData(GameState) )
 import Rules ( GameData(Game) )
+import Errors ( ErrorData(InvalidSpaceError, OccupiedSpaceError, NotANumberError) )
 import Control.Monad.TestFixture
 import Control.Monad.TestFixture.TH
 
@@ -22,31 +23,50 @@ spec = do
   let newGame = GameState []
   let midGame = GameState [1, 3, 5, 7]
 
+  let writeFixture = def {
+      _writeLine = \line -> tell line
+  }
+
+  let readFixture = def {
+      _readLine = return "input"
+  }
+
+  let ioFixture = def {
+      _writeLine = \line -> tell line
+    , _readLine = return "response"
+  }
+
   describe "displayMessage" $ do
     it "sends string to output" $ do
-      let fixture = def {
-           _writeLine = \line -> tell line
-          }
-      let output = logTestFixture (displayMessage "message") fixture
+      let output = logTestFixture (displayMessage "message") writeFixture
       shouldBe output "message"
 
   describe "getUserInput" $ do
     it "receives input string" $ do
-      let fixture = def {
-            _readLine = return "input"
-          }
-      let input = unTestFixture getUserInput fixture
+      let input = unTestFixture getUserInput readFixture
       shouldBe input "input"
 
   describe "displayPrompt" $ do
     it "sends prompt to output" $ do
-      let fixture = def {
-          _writeLine = \line -> tell line
-        , _readLine = return "response"
-        }
-      let (input, output) = evalTestFixture (displayPrompt "prompt") fixture
+      let (input, output) = evalTestFixture (displayPrompt "prompt") ioFixture
       shouldBe output "prompt"
       shouldBe input "response"
+
+  describe "displayError" $ do
+    it "sends invalid space error message to output" $ do
+      let errorMessage = "That space does not exist on the board"
+      let output = logTestFixture (displayError InvalidSpaceError) writeFixture
+      shouldBe output errorMessage
+
+    it "sends occupied space error message to output" $ do
+      let errorMessage = "That space is already occupied"
+      let output = logTestFixture (displayError OccupiedSpaceError) writeFixture
+      shouldBe output errorMessage
+
+    it "sends not a number error message to output" $ do
+      let errorMessage = "That is not a number"
+      let output = logTestFixture (displayError NotANumberError) writeFixture
+      shouldBe output errorMessage
 
   describe "labelSpace" $ do
     it "represents unplayed space as its index" $ do
@@ -91,8 +111,5 @@ spec = do
                        \---+---+---\n\
                        \ 6 | 7 | 8 "
       let game = Game board newGame
-      let fixture = def {
-          _writeLine = \line -> tell line
-        }
-      let output = logTestFixture (displayGame game) fixture
+      let output = logTestFixture (displayGame game) writeFixture
       shouldBe output gameString
