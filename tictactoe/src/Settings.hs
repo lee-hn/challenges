@@ -1,3 +1,5 @@
+{-# LANGUAGE GADTs #-}
+
 module Settings
     (
       PlayerData(Players)
@@ -7,8 +9,8 @@ module Settings
 
 import Player ( PlayerClass )
 
-data PlayerData one two = Players {
-                            playerOne :: one,
-                            playerTwo :: two 
-                          }
-                        deriving (Show, Eq)
+data PlayerData one two where
+    Players :: (PlayerClass one, PlayerClass two) => {
+        playerOne :: one,
+        playerTwo :: two 
+    } -> PlayerData one two 
