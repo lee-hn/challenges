@@ -18,14 +18,14 @@ import Rules
     )
 import Moves
     (
-      MovesData(GameState)
+      MovesData
     , allMoves
     , addMove
     , lastPlayer
     )
 import Board
     (
-      BoardData(Rows)
+      BoardData
     , boardSpaces
     )
 import Data.List

@@ -7,10 +7,18 @@ module Settings
     , playerTwo
     ) where
 
-import Player ( PlayerClass )
+import UI
+    (
+      MonadUI
+    , promptForPlayerOrder
+    , displayError
+    )
+import Errors ( ErrorData(PlayerOrderError) )
+import Human ( HumanPlayerData(HumanPlayer) )
+import Computer ( ComputerPlayerData(ComputerPlayer) )
 
-data PlayerData one two where
-    Players :: (PlayerClass one, PlayerClass two) => {
-        playerOne :: one,
-        playerTwo :: two 
-    } -> PlayerData one two 
+data PlayerData one two = Players {
+      playerOne :: one
+    , playerTwo :: two
+    } deriving (Show, Eq)
+

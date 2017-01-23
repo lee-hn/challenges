@@ -8,7 +8,7 @@ module Game
 import Rules
     (
       GameData(Game)
-    , OutcomeData(PlayerOneWin, PlayerTwoWin, Draw, Continue)
+    , OutcomeData(Continue)
     , boardData
     , movesData
     , outcome
@@ -16,13 +16,14 @@ import Rules
     )
 import Moves
     (
-      MovesData(GameState)
+      MovesData
+    , allMoves
     , addMove
     , lastPlayer
     )
 import Settings
     (
-      PlayerData(Players)
+      PlayerData
     , playerOne
     , playerTwo
     )
@@ -34,15 +35,20 @@ import Player
 import UI
     (
       MonadUI
+    , displayMessage
     , displayOutcome
+    , displayGame
     )
 
-runGame :: (PlayerClass one, PlayerClass two, MonadUI monad) => GameData -> (PlayerData one two) -> monad ()
+runGame :: (MonadUI monad, PlayerClass one, PlayerClass two) => GameData -> (PlayerData one two) -> monad ()
 runGame game players
     | outcome game == Continue = do
         newMove <- nextMove game players
         let updatedMoves = addMove newMove moves
         let updatedGame = Game board updatedMoves
+        let turnNumber = show $ length $ allMoves updatedMoves
+        displayMessage $ "\nTurn " ++ turnNumber ++ ":"
+        displayGame updatedGame
         runGame updatedGame players
     | otherwise = endGame $ outcome game
   where board = boardData game
@@ -51,9 +57,10 @@ runGame game players
 endGame :: MonadUI monad => OutcomeData -> monad ()
 endGame gameOutcome = displayOutcome gameOutcome
 
-nextMove :: (PlayerClass one, PlayerClass two, MonadUI monad) => GameData -> (PlayerData one two) -> monad Int
+nextMove :: (MonadUI monad, PlayerClass one, PlayerClass two) => GameData -> (PlayerData one two) -> monad Int
 nextMove game players
     | player == 0 = makeMove (playerOne players) game
     | player == 1 = makeMove (playerTwo players) game
   where moves = movesData game
         player = nextPlayer moves
+

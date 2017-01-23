@@ -15,8 +15,7 @@ import Minimax
     , chooseBestMove
     )
 
-data ComputerPlayerData = ComputerPlayer
-                        deriving (Show, Eq)
+data ComputerPlayerData = ComputerPlayer deriving (Show, Eq)
 
 instance PlayerClass ComputerPlayerData where
     makeMove computer game = do

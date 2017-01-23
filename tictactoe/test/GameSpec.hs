@@ -38,15 +38,15 @@ spec = do
   describe "endGame" $ do
     it "gives result if Player One wins" $ do
       let result = logTestFixture (endGame PlayerOneWin) fixture
-      shouldBe result "Player One wins"
+      shouldBe result "Player One wins\n"
 
     it "gives result if Player Two wins" $ do
       let result = logTestFixture (endGame PlayerTwoWin) fixture
-      shouldBe result "Player Two wins"
+      shouldBe result "Player Two wins\n"
 
     it "gives result if draw" $ do
       let result = logTestFixture (endGame Draw) fixture
-      shouldBe result "Game ends in a draw"
+      shouldBe result "Game ends in a draw\n"
 
 {-
   describe "nextMove" $ do
@@ -63,9 +63,14 @@ spec = do
     it "ends game if the game is finished" $ do
       let game = Game board finishedGame
       let result = logTestFixture (runGame game players) fixture
-      shouldBe result "Player Two wins"
+      shouldBe result "Player Two wins\n"
 
     it "makes move and ends game if game is unfinished" $ do
       let game = Game board unfinishedGame
+      let gameString = " O | O | O \n\
+                       \---+---+---\n\
+                       \ 3 | X | X \n\
+                       \---+---+---\n\
+                       \ X | 7 | 8 "
       let result = logTestFixture (runGame game players) fixture
-      shouldBe result "Player Two wins"
+      shouldBe result ("\nTurn 6:\n" ++ gameString ++ "\nPlayer Two wins\n")

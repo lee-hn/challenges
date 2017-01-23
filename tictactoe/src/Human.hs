@@ -11,7 +11,7 @@ import Player
     )
 import Rules
     (
-      GameData(Game)
+      GameData
     , boardData
     , movesData
     , isSpace
@@ -29,8 +29,7 @@ import Errors
     )
 import Data.Maybe
 
-data HumanPlayerData = HumanPlayer
-                     deriving (Show, Eq)
+data HumanPlayerData = HumanPlayer deriving (Show, Eq)
 
 instance PlayerClass HumanPlayerData where
     makeMove human game = do
@@ -54,4 +53,3 @@ instance PlayerClass HumanPlayerData where
               return $ fromJust move
       where board = boardData game
             moves = movesData game
-

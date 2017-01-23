@@ -7,6 +7,7 @@ module UI
     , getUserInput
     , displayPrompt
     , promptForMove
+    , promptForPlayerOrder
     , displayError
     , displayOutcome
     , displayGame
@@ -16,25 +17,25 @@ module UI
 
 import Rules
     (
-      GameData(Game)
+      GameData
     , boardData
     , movesData
     , OutcomeData(PlayerOneWin, PlayerTwoWin, Draw)
     )
 import Moves
     (
-      MovesData(GameState)
+      MovesData
     , allMoves
     )
 import Board
     (
-      BoardData(Rows)
+      BoardData
     , boardDimension
     , boardSpaces
     )
 import Errors
     (
-      ErrorData(InvalidSpaceError, OccupiedSpaceError, NotANumberError)
+      ErrorData(InvalidSpaceError, OccupiedSpaceError, NotANumberError, PlayerOrderError)
     )
 import Data.List
 import Data.List.Split
@@ -50,28 +51,38 @@ instance MonadUI IO where
     readLine = getLine
 
 displayMessage :: MonadUI monad => String -> monad ()
-displayMessage message = writeLine message
+displayMessage message = writeLine $ message ++ "\n"
 
 getUserInput :: MonadUI monad => monad String
 getUserInput = readLine
 
 displayPrompt :: MonadUI monad => String -> monad String
 displayPrompt prompt = do
-    writeLine prompt
-    readLine
+    displayMessage prompt
+    getUserInput
 
 promptForMove :: MonadUI monad => monad (Maybe Int)
 promptForMove = do
     move <- (displayPrompt "Please enter the number of the space where you want to make a move")
     if all isDigit move
         then return $ Just (read move :: Int)
-        else return $ Nothing
+        else return Nothing
+
+promptForPlayerOrder :: MonadUI monad => monad Int
+promptForPlayerOrder = do
+    order <- (displayPrompt "Do you want to play first or second? Please enter 1 or 2")
+    if isInfixOf order "12"
+        then return (read order :: Int)
+        else do
+            displayError PlayerOrderError
+            promptForPlayerOrder
 
 displayError :: MonadUI monad => ErrorData -> monad ()
 displayError error
     | error == InvalidSpaceError = displayMessage "That space does not exist on the board"
     | error == OccupiedSpaceError = displayMessage "That space is already occupied"
     | error == NotANumberError = displayMessage "That is not a number"
+    | error == PlayerOrderError = displayMessage "That is not a valid response"
 
 displayOutcome :: MonadUI monad => OutcomeData -> monad ()
 displayOutcome outcome
