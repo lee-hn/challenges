@@ -1,4 +1,4 @@
-module Rules
+module Components.Rules
     (
       GameData(Game)
     , boardData
@@ -12,13 +12,13 @@ module Rules
     , nextPlayer
     ) where
 
-import Board
+import Components.Board
     (
       BoardData(Rows)
     , boardRows
     , boardSpaces
     )
-import Moves
+import Components.Moves
     (
       MovesData(GameState)
     , allMoves

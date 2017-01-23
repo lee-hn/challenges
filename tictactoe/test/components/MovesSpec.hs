@@ -1,7 +1,7 @@
-module MovesSpec where
+module Components.MovesSpec where
 
 import Test.Hspec
-import Moves
+import Components.Moves
 
 main :: IO ()
 main = hspec spec

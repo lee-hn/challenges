@@ -4,8 +4,8 @@ module SettingsSpec where
 
 import Test.Hspec
 import Settings
-import Computer ( ComputerPlayerData(ComputerPlayer) )
-import Human ( HumanPlayerData(HumanPlayer) )
+import Players.Computer ( ComputerPlayerData(ComputerPlayer) )
+import Players.Human ( HumanPlayerData(HumanPlayer) )
 
 main :: IO ()
 main = hspec spec

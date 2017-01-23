@@ -1,13 +1,13 @@
 {-# LANGUAGE TemplateHaskell, FlexibleInstances #-}
 
-module ComputerSpec where
+module Players.ComputerSpec where
 
 import Test.Hspec
-import Computer
-import Rules ( GameData(Game) )
-import Board ( BoardData(Rows) )
-import Moves ( MovesData(GameState) )
-import UI ( MonadUI )
+import Players.Computer
+import Components.Rules ( GameData(Game) )
+import Components.Board ( BoardData(Rows) )
+import Components.Moves ( MovesData(GameState) )
+import UI.UI ( MonadUI )
 import Control.Monad.TestFixture
 import Control.Monad.TestFixture.TH
 

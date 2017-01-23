@@ -1,4 +1,4 @@
-module Errors
+module UI.Errors
   (
     ErrorData(InvalidSpaceError, OccupiedSpaceError, NotANumberError, PlayerOrderError)
   ) where

@@ -1,16 +1,16 @@
-module Human
+module Players.Human
     (
       HumanPlayerData(HumanPlayer)
     , makeMove
     , isValid
     ) where
 
-import Player
+import Players.Player
     (
       PlayerClass
     , makeMove
     )
-import Rules
+import Components.Rules
     (
       GameData
     , boardData
@@ -18,13 +18,13 @@ import Rules
     , isSpace
     , isUnoccupied
     )
-import UI
+import UI.UI
     (
       MonadUI
     , promptForMove
     , displayError
     )
-import Errors
+import UI.Errors
     (
       ErrorData(InvalidSpaceError, OccupiedSpaceError, NotANumberError)
     )

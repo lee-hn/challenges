@@ -4,16 +4,16 @@ module GameSpec where
 
 import Test.Hspec
 import Game
-import Board ( BoardData(Rows) )
-import Moves ( MovesData(GameState) )
-import Rules
+import Components.Board ( BoardData(Rows) )
+import Components.Moves ( MovesData(GameState) )
+import Components.Rules
     (
       GameData(Game)
     , OutcomeData(PlayerOneWin, PlayerTwoWin, Draw)
     )
 import Settings ( PlayerData(Players) )
 import Mocks ( MockPlayerData(MockPlayer) )
-import UI ( MonadUI, readLine )
+import UI.UI ( MonadUI, readLine )
 import Control.Monad.TestFixture
 import Control.Monad.TestFixture.TH
 

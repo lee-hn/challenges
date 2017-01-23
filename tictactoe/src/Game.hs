@@ -5,7 +5,7 @@ module Game
     , nextMove
     ) where
 
-import Rules
+import Components.Rules
     (
       GameData(Game)
     , OutcomeData(Continue)
@@ -14,7 +14,7 @@ import Rules
     , outcome
     , nextPlayer
     )
-import Moves
+import Components.Moves
     (
       MovesData
     , allMoves
@@ -27,12 +27,12 @@ import Settings
     , playerOne
     , playerTwo
     )
-import Player
+import Players.Player
     (
       PlayerClass
     , makeMove
     )
-import UI
+import UI.UI
     (
       MonadUI
     , displayMessage

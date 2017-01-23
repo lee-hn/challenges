@@ -1,15 +1,15 @@
-module Computer
+module Players.Computer
     (
       ComputerPlayerData(ComputerPlayer)
     , makeMove
     ) where
 
-import Player
+import Players.Player
     (
       PlayerClass
     , makeMove
     )
-import Minimax
+import Components.Minimax
     (
       scorePossibleMoves
     , chooseBestMove

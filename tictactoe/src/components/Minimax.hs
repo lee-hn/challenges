@@ -1,4 +1,4 @@
-module Minimax
+module Components.Minimax
     (
       scoreMove
     , possibleMoves
@@ -6,7 +6,7 @@ module Minimax
     , chooseBestMove
     ) where
 
-import Rules
+import Components.Rules
     (
       GameData(Game)
     , boardData
@@ -16,14 +16,14 @@ import Rules
     , outcome
     , nextPlayer
     )
-import Moves
+import Components.Moves
     (
       MovesData
     , allMoves
     , addMove
     , lastPlayer
     )
-import Board
+import Components.Board
     (
       BoardData
     , boardSpaces

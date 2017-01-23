@@ -1,11 +1,11 @@
-module Player
+module Players.Player
     (
       PlayerClass
     , makeMove
     ) where
 
-import Rules ( GameData )
-import UI ( MonadUI )
+import Components.Rules ( GameData )
+import UI.UI ( MonadUI )
 
 class PlayerClass player where
     makeMove :: MonadUI monad => player -> GameData -> monad Int

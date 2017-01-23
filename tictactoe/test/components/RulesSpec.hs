@@ -1,9 +1,9 @@
-module RulesSpec where
+module Components.RulesSpec where
 
 import Test.Hspec
-import Rules
-import Board ( BoardData(Rows) )
-import Moves ( MovesData(GameState) )
+import Components.Rules
+import Components.Board ( BoardData(Rows) )
+import Components.Moves ( MovesData(GameState) )
 
 main :: IO ()
 main = hspec spec

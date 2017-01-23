@@ -1,4 +1,4 @@
-module Board
+module Components.Board
     (
       BoardData(Rows)
     , boardDimension

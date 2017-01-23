@@ -1,17 +1,17 @@
 {-# LANGUAGE TemplateHaskell, FlexibleInstances #-}
 
-module UISpec where
+module UI.UISpec where
 
 import Test.Hspec
-import UI
-import Board ( BoardData(Rows) )
-import Moves ( MovesData(GameState) )
-import Rules
+import UI.UI
+import UI.Errors ( ErrorData(InvalidSpaceError, OccupiedSpaceError, NotANumberError, PlayerOrderError) )
+import Components.Board ( BoardData(Rows) )
+import Components.Moves ( MovesData(GameState) )
+import Components.Rules
     (
       GameData(Game)
     , OutcomeData(PlayerOneWin, PlayerTwoWin, Draw)
     )
-import Errors ( ErrorData(InvalidSpaceError, OccupiedSpaceError, NotANumberError, PlayerOrderError) )
 import Control.Monad.TestFixture
 import Control.Monad.TestFixture.TH
 

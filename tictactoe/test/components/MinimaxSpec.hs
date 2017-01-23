@@ -1,10 +1,10 @@
-module MinimaxSpec where
+module Components.MinimaxSpec where
 
 import Test.Hspec
-import Minimax
-import Rules ( GameData(Game) )
-import Board ( BoardData(Rows) )
-import Moves ( MovesData(GameState) )
+import Components.Minimax
+import Components.Rules ( GameData(Game) )
+import Components.Board ( BoardData(Rows) )
+import Components.Moves ( MovesData(GameState) )
 
 main :: IO ()
 main = hspec spec

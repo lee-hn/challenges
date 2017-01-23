@@ -7,15 +7,15 @@ module Settings
     , playerTwo
     ) where
 
-import UI
+import UI.UI
     (
       MonadUI
     , promptForPlayerOrder
     , displayError
     )
-import Errors ( ErrorData(PlayerOrderError) )
-import Human ( HumanPlayerData(HumanPlayer) )
-import Computer ( ComputerPlayerData(ComputerPlayer) )
+import UI.Errors ( ErrorData(PlayerOrderError) )
+import Players.Human ( HumanPlayerData(HumanPlayer) )
+import Players.Computer ( ComputerPlayerData(ComputerPlayer) )
 
 data PlayerData one two = Players {
       playerOne :: one

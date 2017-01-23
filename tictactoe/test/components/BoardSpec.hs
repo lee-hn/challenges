@@ -1,7 +1,7 @@
-module BoardSpec where
+module Components.BoardSpec where
 
 import Test.Hspec
-import Board
+import Components.Board
 
 main :: IO ()
 main = hspec spec

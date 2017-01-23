@@ -1,16 +1,15 @@
 module Main where
 
-import Board ( BoardData(Rows) )
-import Moves ( MovesData(GameState) )
-import Rules ( GameData(Game) )
+import Components.Board ( BoardData(Rows) )
+import Components.Moves ( MovesData(GameState) )
+import Components.Rules ( GameData(Game) )
 import Game ( runGame )
 import Settings ( PlayerData(Players) )
-import Computer ( ComputerPlayerData(ComputerPlayer) )
-import Human ( HumanPlayerData(HumanPlayer) )
-import UI
+import Players.Computer ( ComputerPlayerData(ComputerPlayer) )
+import Players.Human ( HumanPlayerData(HumanPlayer) )
+import UI.UI
     (
-      displayMessage
-    , promptForPlayerOrder
+      promptForPlayerOrder
     , displayGame
     , displayTitle
     , displayGameBegin

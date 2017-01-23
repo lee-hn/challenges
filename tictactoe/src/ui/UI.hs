@@ -1,4 +1,4 @@
-module UI
+module UI.UI
     (
       MonadUI
     , writeLine
@@ -18,25 +18,25 @@ module UI
     , displayGameOver
     ) where
 
-import Rules
+import Components.Rules
     (
       GameData
     , boardData
     , movesData
     , OutcomeData(PlayerOneWin, PlayerTwoWin, Draw)
     )
-import Moves
+import Components.Moves
     (
       MovesData
     , allMoves
     )
-import Board
+import Components.Board
     (
       BoardData
     , boardDimension
     , boardSpaces
     )
-import Errors
+import UI.Errors
     (
       ErrorData(InvalidSpaceError, OccupiedSpaceError, NotANumberError, PlayerOrderError)
     )

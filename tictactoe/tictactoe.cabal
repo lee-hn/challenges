@@ -15,17 +15,17 @@ cabal-version:       >=1.10
 
 library
   hs-source-dirs:      src
-  exposed-modules:     Board
-                     , Moves
-                     , Rules
+  exposed-modules:     Components.Board
+                     , Components.Moves
+                     , Components.Rules
+                     , Components.Minimax
                      , Game
                      , Settings
-                     , Player
-                     , Computer
-                     , Minimax
-                     , Human
-                     , UI
-                     , Errors
+                     , Players.Player
+                     , Players.Computer
+                     , Players.Human
+                     , UI.UI
+                     , UI.Errors
   build-depends:       base >= 4.7 && < 5
                      , mtl
                      , random
@@ -43,6 +43,9 @@ executable tictactoe-exe
 test-suite tictactoe-test
   type:                exitcode-stdio-1.0
   hs-source-dirs:      test
+                     , test/components
+                     , test/players
+                     , test/ui
   main-is:             Spec.hs
   build-depends:       base
                      , tictactoe

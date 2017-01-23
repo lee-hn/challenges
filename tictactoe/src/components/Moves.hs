@@ -1,4 +1,4 @@
-module Moves
+module Components.Moves
   (
     MovesData(GameState)
   , allMoves

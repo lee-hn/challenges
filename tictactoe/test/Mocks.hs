@@ -3,12 +3,12 @@ module Mocks
       MockPlayerData(MockPlayer)
     ) where
 
-import Player
+import Players.Player
     (
       PlayerClass
     , makeMove
     )
-import UI
+import UI.UI
     (
       MonadUI
     , writeLine
