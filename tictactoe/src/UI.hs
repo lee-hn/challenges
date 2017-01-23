@@ -64,14 +64,14 @@ displayPrompt prompt = do
 promptForMove :: MonadUI monad => monad (Maybe Int)
 promptForMove = do
     move <- (displayPrompt "Please enter the number of the space where you want to make a move")
-    if all isDigit move
+    if length move > 0 && all isDigit move
         then return $ Just (read move :: Int)
         else return Nothing
 
 promptForPlayerOrder :: MonadUI monad => monad Int
 promptForPlayerOrder = do
     order <- (displayPrompt "Do you want to play first or second? Please enter 1 or 2")
-    if isInfixOf order "12"
+    if length order > 0 && isInfixOf order "12"
         then return (read order :: Int)
         else do
             displayError PlayerOrderError

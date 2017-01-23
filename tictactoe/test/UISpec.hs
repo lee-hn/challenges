@@ -75,6 +75,15 @@ spec = do
       shouldBe output "Please enter the number of the space where you want to make a move\n"
       shouldBe input Nothing
 
+    it "returns Nothing if input move cannot be read as an integer" $ do
+      let fixture = def {
+          _writeLine = \line -> tell line
+        , _readLine = return ""
+      }
+      let (input, output) = evalTestFixture promptForMove fixture
+      shouldBe output "Please enter the number of the space where you want to make a move\n"
+      shouldBe input Nothing
+
   describe "promptForPlayerOrder" $ do
     it "sends a prompt for player order and receives user input of 1" $ do
       let fixture = def {
