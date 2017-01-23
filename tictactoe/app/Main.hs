@@ -12,6 +12,9 @@ import UI
       displayMessage
     , promptForPlayerOrder
     , displayGame
+    , displayTitle
+    , displayGameBegin
+    , displayGameOver
     )
 
 main :: IO ()
@@ -22,15 +25,14 @@ main = do
     let computerFirst = Players ComputerPlayer HumanPlayer
     let humanFirst = Players HumanPlayer ComputerPlayer
 
-    displayMessage "\nTIC TAC TOE\n============"
+    displayTitle
 
     order <- promptForPlayerOrder
 
-    displayMessage "\nSTART GAME"
-    displayGame game
+    displayGameBegin game
 
     case order of
       1 -> runGame game humanFirst
       2 -> runGame game computerFirst
 
-    displayMessage "GAME OVER"
+    displayGameOver

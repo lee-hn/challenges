@@ -185,3 +185,28 @@ spec = do
       let game = Game board newGame
       let output = logTestFixture (displayGame game) writeFixture
       shouldBe output (gameString ++ "\n")
+
+  describe "displayTitle" $ do
+    it "displays the game title" $ do
+      let title = "\nTIC TAC TOE\n==========="
+      let output = logTestFixture displayTitle writeFixture
+      shouldBe output (title ++ "\n")
+
+  describe "displayGameBegin" $ do
+    it "displays the game begin message and empty board" $ do
+      let game = Game board newGame
+      let message = "\nGAME BEGIN"
+      let gameString = " 0 | 1 | 2 \n\
+                       \---+---+---\n\
+                       \ 3 | 4 | 5 \n\
+                       \---+---+---\n\
+                       \ 6 | 7 | 8 "
+      let output = logTestFixture (displayGameBegin game) writeFixture
+      shouldBe output (message ++ "\n" ++ gameString ++ "\n")
+
+  describe "displayGameOver" $ do
+    it "displays the game over message" $ do
+      let message = "GAME OVER"
+      let output = logTestFixture displayGameOver writeFixture
+      shouldBe output (message ++ "\n")
+

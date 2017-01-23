@@ -13,6 +13,9 @@ module UI
     , displayGame
     , convertGameToString
     , labelSpace
+    , displayTitle
+    , displayGameBegin
+    , displayGameOver
     ) where
 
 import Rules
@@ -112,3 +115,14 @@ labelSpace space game
     | odd $ moveIndex = " " ++ "O" ++ " "
   where moves = allMoves $ movesData game
         moveIndex = fromJust $ elemIndex space moves
+
+displayTitle :: MonadUI monad => monad ()
+displayTitle = displayMessage "\nTIC TAC TOE\n==========="
+
+displayGameBegin :: MonadUI monad => GameData -> monad ()
+displayGameBegin game = do
+    displayMessage "\nGAME BEGIN"
+    displayGame game
+
+displayGameOver :: MonadUI monad => monad ()
+displayGameOver = displayMessage "GAME OVER"
