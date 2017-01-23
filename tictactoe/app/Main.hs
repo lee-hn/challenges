@@ -1,6 +1,5 @@
 module Main where
 
-import Lib
 import Board ( BoardData(Rows) )
 import Moves ( MovesData(GameState) )
 import Rules ( GameData(Game) )
