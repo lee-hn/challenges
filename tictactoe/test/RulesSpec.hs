@@ -19,17 +19,23 @@ spec = do
 
   describe "isSpace" $ do
     it "returns True if move is in a board space" $ do
-      shouldBe (isSpace 0 board) True
+      shouldBe (isSpace (Just 0) board) True
 
     it "returns False if move is not in a board space" $ do
-      shouldBe (isSpace 9 board) False
+      shouldBe (isSpace (Just 9) board) False
+
+    it "returns False if move is Nothing" $ do
+      shouldBe (isSpace Nothing board) False
 
   describe "isUnoccupied" $ do
     it "returns True if move is in unoccupied space" $ do
-      shouldBe (isUnoccupied 4 newGame) True
+      shouldBe (isUnoccupied (Just 4) newGame) True
 
     it "returns False if move is in occupied space" $ do
-      shouldBe (isUnoccupied 4 (GameState [4])) False
+      shouldBe (isUnoccupied (Just 4) (GameState [4])) False
+
+    it "returns False if move is Nothing" $ do
+      shouldBe (isUnoccupied Nothing newGame) False
 
   describe "isWin" $ do
     it "returns False if neither player has won" $ do

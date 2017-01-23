@@ -20,8 +20,8 @@ import Moves
     , addMove
     , lastPlayer
     )
-import Settings 
-    ( 
+import Settings
+    (
       PlayerData(Players)
     , playerOne
     , playerTwo
@@ -31,11 +31,16 @@ import Player
       PlayerClass
     , makeMove
     )
+import UI
+    (
+      MonadUI
+    , displayOutcome
+    )
 
-runGame :: (PlayerClass one, PlayerClass two) => GameData -> (PlayerData one two) -> String
+runGame :: (PlayerClass one, PlayerClass two, MonadUI monad) => GameData -> (PlayerData one two) -> monad ()
 runGame game players
     | outcome game == Continue = do
-        let newMove = nextMove game players
+        newMove <- nextMove game players
         let updatedMoves = addMove newMove moves
         let updatedGame = Game board updatedMoves
         runGame updatedGame players
@@ -43,13 +48,10 @@ runGame game players
   where board = boardData game
         moves = movesData game
 
-endGame :: OutcomeData -> String
-endGame gameOutcome
-    | gameOutcome == PlayerOneWin = "Player One wins"
-    | gameOutcome == PlayerTwoWin = "Player Two wins"
-    | gameOutcome == Draw = "Draw"
+endGame :: MonadUI monad => OutcomeData -> monad ()
+endGame gameOutcome = displayOutcome gameOutcome
 
-nextMove :: (PlayerClass one, PlayerClass two) => GameData -> (PlayerData one two) -> Int
+nextMove :: (PlayerClass one, PlayerClass two, MonadUI monad) => GameData -> (PlayerData one two) -> monad Int
 nextMove game players
     | player == 0 = makeMove (playerOne players) game
     | player == 1 = makeMove (playerTwo players) game

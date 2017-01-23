@@ -20,5 +20,4 @@ data MockPlayerData = MockPlayer
                     deriving (Show, Eq)
 
 instance PlayerClass MockPlayerData where
-    makeMove mock game = 0
-
+    makeMove mock game = return 0

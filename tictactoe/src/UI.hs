@@ -8,6 +8,7 @@ module UI
     , displayPrompt
     , promptForMove
     , displayError
+    , displayOutcome
     , displayGame
     , convertGameToString
     , labelSpace
@@ -18,6 +19,7 @@ import Rules
       GameData(Game)
     , boardData
     , movesData
+    , OutcomeData(PlayerOneWin, PlayerTwoWin, Draw)
     )
 import Moves
     (
@@ -70,6 +72,12 @@ displayError error
     | error == InvalidSpaceError = displayMessage "That space does not exist on the board"
     | error == OccupiedSpaceError = displayMessage "That space is already occupied"
     | error == NotANumberError = displayMessage "That is not a number"
+
+displayOutcome :: MonadUI monad => OutcomeData -> monad ()
+displayOutcome outcome
+    | outcome == PlayerOneWin = displayMessage "Player One wins"
+    | outcome == PlayerTwoWin = displayMessage "Player Two wins"
+    | outcome == Draw = displayMessage "Game ends in a draw"
 
 displayGame :: MonadUI monad => GameData -> monad ()
 displayGame game = displayMessage gameString

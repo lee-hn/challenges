@@ -26,19 +26,24 @@ import Moves
     , lastPlayer
     )
 import Data.List
+import Data.Maybe
 
 data GameData = Game {
                   boardData :: BoardData
                 , movesData :: MovesData
                 } deriving (Show)
 
-isSpace :: Int -> BoardData -> Bool
-isSpace move board = elem move spaces
-                   where spaces = boardSpaces board
+isSpace :: Maybe Int -> BoardData -> Bool
+isSpace move board
+    | isNothing move = False
+    | otherwise = elem (fromJust move) spaces
+  where spaces = boardSpaces board
 
-isUnoccupied :: Int -> MovesData -> Bool
-isUnoccupied move moves = notElem move gameState
-                        where gameState = allMoves moves
+isUnoccupied :: Maybe Int -> MovesData -> Bool
+isUnoccupied move moves
+    | isNothing move = False
+    | otherwise = notElem (fromJust move) gameState
+  where gameState = allMoves moves
 
 isWin :: GameData -> Bool
 isWin game = or [isPlayerOneWin, isPlayerTwoWin]

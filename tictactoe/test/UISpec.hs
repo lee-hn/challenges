@@ -6,7 +6,11 @@ import Test.Hspec
 import UI
 import Board ( BoardData(Rows) )
 import Moves ( MovesData(GameState) )
-import Rules ( GameData(Game) )
+import Rules
+    (
+      GameData(Game)
+    , OutcomeData(PlayerOneWin, PlayerTwoWin, Draw)
+    )
 import Errors ( ErrorData(InvalidSpaceError, OccupiedSpaceError, NotANumberError) )
 import Control.Monad.TestFixture
 import Control.Monad.TestFixture.TH
@@ -85,6 +89,22 @@ spec = do
       let errorMessage = "That is not a number"
       let output = logTestFixture (displayError NotANumberError) writeFixture
       shouldBe output errorMessage
+
+  describe "displayOutcome" $ do
+    it "sends outcome when player one wins to output" $ do
+      let outcomeMessage = "Player One wins"
+      let output = logTestFixture (displayOutcome PlayerOneWin) writeFixture
+      shouldBe output outcomeMessage
+
+    it "sends outcome when player two wins to output" $ do
+      let outcomeMessage = "Player Two wins"
+      let output = logTestFixture (displayOutcome PlayerTwoWin) writeFixture
+      shouldBe output outcomeMessage
+
+    it "sends outcome when game is a draw to output" $ do
+      let outcomeMessage = "Game ends in a draw"
+      let output = logTestFixture (displayOutcome Draw) writeFixture
+      shouldBe output outcomeMessage
 
   describe "labelSpace" $ do
     it "represents unplayed space as its index" $ do

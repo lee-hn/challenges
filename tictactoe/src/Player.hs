@@ -5,7 +5,7 @@ module Player
     ) where
 
 import Rules ( GameData(Game) )
+import UI ( MonadUI )
 
 class PlayerClass player where
-    makeMove :: player -> GameData -> Int
-
+    makeMove :: MonadUI monad => player -> GameData -> monad Int

@@ -29,7 +29,7 @@ import Board
     , boardSpaces
     )
 import Data.List
-import System.Random 
+import System.Random
 
 scoreMove :: Int -> GameData -> Int
 scoreMove move game
@@ -60,12 +60,12 @@ scorePossibleMoves game = zip spaces scores
 chooseBestMove :: [(Int, Int)] -> (Int, Int)
 chooseBestMove moveScores
     | numBestMoves == 1 = head bestMoves
-    | otherwise = pickRandomMove bestMoves 
+    | otherwise = pickRandomMove bestMoves
   where bestScore = maximum $ snd $ unzip moveScores
         bestMoves = [moveScore | moveScore <- moveScores,
                                  snd moveScore == bestScore]
         numBestMoves = length bestMoves
-    
+
 pickRandomMove :: [(Int, Int)] -> (Int, Int)
 pickRandomMove moveScores = do
     let gen = mkStdGen 9
