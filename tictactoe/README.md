@@ -18,14 +18,11 @@ system, you can use `stack` to install it:
 
 1. `git clone https://github.com/lee-hn/challenges.git`
 2. `cd path/to/challenges/tictactoe`
-3. `stack install`
+3. `stack build`
 
 ## Running the game
 
-`~/.local/bin/tictactoe-exe`
-
-(If you have changed your local bin path setting in `stack`, replace
-`~/.local/bin/` with the output to `stack path --local-bin-path`.)
+`stack exec tictactoe-exe`
 
 ## Running the test suite
 
