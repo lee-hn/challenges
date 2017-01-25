@@ -1,6 +1,6 @@
 module Components.Rules
     (
-      GameData(Game)
+      GameData(Components)
     , boardData
     , movesData
     , OutcomeData(PlayerOneWin, PlayerTwoWin, Draw, Continue)
@@ -28,7 +28,7 @@ import Components.Moves
 import Data.List
 import Data.Maybe
 
-data GameData = Game {
+data GameData = Components {
                   boardData :: BoardData
                 , movesData :: MovesData
                 } deriving (Show)

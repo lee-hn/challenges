@@ -7,12 +7,6 @@ module Settings
     , playerTwo
     ) where
 
-import UI.UI
-    (
-      MonadUI
-    , promptForPlayerOrder
-    , displayError
-    )
 import Players.Human ( HumanPlayerData(HumanPlayer) )
 import Players.Computer ( ComputerPlayerData(ComputerPlayer) )
 

@@ -8,13 +8,6 @@ import Players.Player
       PlayerClass
     , makeMove
     )
-import UI.UI
-    (
-      MonadUI
-    , writeLine
-    , readLine
-    )
-import Control.Monad.Writer
 
 data MockPlayerData = MockPlayer
                     deriving (Show, Eq)

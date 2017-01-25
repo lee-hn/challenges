@@ -4,7 +4,7 @@ module Players.ComputerSpec where
 
 import Test.Hspec
 import Players.Computer
-import Components.Rules ( GameData(Game) )
+import Components.Rules ( GameData(Components) )
 import Components.Board ( BoardData(Rows) )
 import Components.Moves ( MovesData(GameState) )
 import UI.UI ( MonadUI )
@@ -31,16 +31,16 @@ spec = do
 
   describe "makeMove" $ do
     it "makes the only possible move" $ do
-      let game = Game board nearEndGame
+      let game = Components board nearEndGame
       let move = unTestFixture (makeMove computer game) fixture
       shouldBe move 2
 
     it "chooses the winning move out of three possible moves" $ do
-      let game = Game board midGame
+      let game = Components board midGame
       let move = unTestFixture (makeMove computer game) fixture
       shouldBe move 5
 
     it "can make a move at the beginning of a game" $ do
-      let game = Game board newGame
+      let game = Components board newGame
       let move = unTestFixture (makeMove computer game) fixture
       shouldBe (elem move [0..8]) True

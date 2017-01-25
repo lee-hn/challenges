@@ -8,7 +8,7 @@ import Components.Board ( BoardData(Rows) )
 import Components.Moves ( MovesData(GameState) )
 import Components.Rules
     (
-      GameData(Game)
+      GameData(Components)
     , OutcomeData(PlayerOneWin, PlayerTwoWin, Draw)
     )
 import Settings ( PlayerData(Players) )
@@ -54,23 +54,23 @@ spec = do
 
   describe "nextMove" $ do
     it "returns a move when next player is player one" $ do
-      let game = Game board newGame
-      let move = unTestFixture (nextMove game players) readFixture 
+      let game = Components board newGame
+      let move = unTestFixture (nextMove game players) readFixture
       shouldBe move 0
 
     it "returns a move when next player is player two" $ do
-      let game = Game board unfinishedGame
-      let move = unTestFixture (nextMove game players) readFixture 
-      shouldBe move 0 
+      let game = Components board unfinishedGame
+      let move = unTestFixture (nextMove game players) readFixture
+      shouldBe move 0
 
   describe "runGame" $ do
     it "ends game if the game is finished" $ do
-      let game = Game board finishedGame
+      let game = Components board finishedGame
       let result = logTestFixture (runGame game players) writeFixture
       shouldBe result "Player Two wins\n"
 
     it "makes move and ends game if game is unfinished" $ do
-      let game = Game board unfinishedGame
+      let game = Components board unfinishedGame
       let gameString = " O | O | O \n\
                        \---+---+---\n\
                        \ 3 | X | X \n\

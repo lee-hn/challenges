@@ -2,7 +2,7 @@ module Main where
 
 import Components.Board ( BoardData(Rows) )
 import Components.Moves ( MovesData(GameState) )
-import Components.Rules ( GameData(Game) )
+import Components.Rules ( GameData(Components) )
 import Game ( runGame )
 import Settings ( PlayerData(Players) )
 import Players.Computer ( ComputerPlayerData(ComputerPlayer) )
@@ -24,7 +24,7 @@ main = do
 
     let board = Rows 3
     let newGame = GameState []
-    let game = Game board newGame
+    let game = Components board newGame
     let computerFirst = Players ComputerPlayer HumanPlayer
     let humanFirst = Players HumanPlayer ComputerPlayer
 

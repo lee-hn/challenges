@@ -7,10 +7,10 @@ module Game
 
 import Components.Rules
     (
-      GameData(Game)
-    , OutcomeData(Continue)
+      GameData(Components)
     , boardData
     , movesData
+    , OutcomeData(Continue)
     , outcome
     , nextPlayer
     )
@@ -45,7 +45,7 @@ runGame game players
     | outcome game == Continue = do
         newMove <- nextMove game players
         let updatedMoves = addMove newMove moves
-        let updatedGame = Game board updatedMoves
+        let updatedGame = Components board updatedMoves
         let turnNumber = show $ length $ allMoves updatedMoves
         displayMessage $ "\nTurn " ++ turnNumber ++ ":"
         displayGame updatedGame

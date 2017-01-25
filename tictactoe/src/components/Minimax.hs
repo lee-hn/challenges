@@ -8,7 +8,7 @@ module Components.Minimax
 
 import Components.Rules
     (
-      GameData(Game)
+      GameData(Components)
     , boardData
     , movesData
     , isWin
@@ -42,7 +42,7 @@ scoreMove move game
   where board = boardData game
         moves = movesData game
         updatedMoves = addMove move moves
-        updatedGame = Game board updatedMoves
+        updatedGame = Components board updatedMoves
 
 possibleMoves :: GameData -> [Int]
 possibleMoves game

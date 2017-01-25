@@ -39,41 +39,41 @@ spec = do
 
   describe "isWin" $ do
     it "returns False if neither player has won" $ do
-      let game = Game board newGame
+      let game = Components board newGame
       shouldBe (isWin game) False
 
     it "returns True if a player has won" $ do
-      let game = Game board playerTwoWinGame
+      let game = Components board playerTwoWinGame
       shouldBe (isWin game) True
 
   describe "isDraw" $ do
     it "returns False if board is not full" $ do
-      let game = Game board newGame
+      let game = Components board newGame
       shouldBe (isDraw game) False
 
     it "returns False if board is full and a player has won" $ do
-      let game = Game board playerOneWinGame
+      let game = Components board playerOneWinGame
       shouldBe (isDraw game) False
 
     it "returns True is board is full and no player has won" $ do
-      let game = Game board drawGame
+      let game = Components board drawGame
       shouldBe (isDraw game) True
 
   describe "outcome" $ do
     it "returns PlayerOneWin if there is a win by player one" $ do
-      let game = Game board playerOneWinGame
+      let game = Components board playerOneWinGame
       shouldBe (outcome game) PlayerOneWin
 
     it "returns PlayerTwoWin if there is a win by player two" $ do
-      let game = Game board playerTwoWinGame
+      let game = Components board playerTwoWinGame
       shouldBe (outcome game) PlayerTwoWin
 
     it "returns Draw if there is a draw" $ do
-      let game = Game board drawGame
+      let game = Components board drawGame
       shouldBe (outcome game) Draw
 
     it "returns Continue if there is no win or draw" $ do
-      let game = Game board newGame
+      let game = Components board newGame
       shouldBe (outcome game) Continue
 
   describe "nextPlayer" $ do

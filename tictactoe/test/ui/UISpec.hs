@@ -9,7 +9,7 @@ import Components.Board ( BoardData(Rows) )
 import Components.Moves ( MovesData(GameState) )
 import Components.Rules
     (
-      GameData(Game)
+      GameData(Components)
     , OutcomeData(PlayerOneWin, PlayerTwoWin, Draw)
     )
 import Control.Monad.TestFixture
@@ -143,17 +143,17 @@ spec = do
   describe "labelSpace" $ do
     it "represents unplayed space as its index" $ do
       let label = " 0 "
-      let game = Game board midGame
+      let game = Components board midGame
       shouldBe (labelSpace 0 game) label
 
     it "represents move by player one with marker X" $ do
       let label = " X "
-      let game = Game board midGame
+      let game = Components board midGame
       shouldBe (labelSpace 1 game) label
 
     it "represents move by player two with marker O" $ do
       let label = " O "
-      let game = Game board midGame
+      let game = Components board midGame
       shouldBe (labelSpace 3 game) label
 
   describe "convertGameToString" $ do
@@ -163,7 +163,7 @@ spec = do
                        \ 3 | 4 | 5 \n\
                        \---+---+---\n\
                        \ 6 | 7 | 8 "
-      let game = Game board newGame
+      let game = Components board newGame
       shouldBe (convertGameToString game) gameString
 
     it "represents in-progress game on 3x3 board as string" $ do
@@ -172,7 +172,7 @@ spec = do
                        \ O | 4 | X \n\
                        \---+---+---\n\
                        \ 6 | O | 8 "
-      let game = Game board midGame
+      let game = Components board midGame
       shouldBe (convertGameToString game) gameString
 
   describe "displayGame" $ do
@@ -182,7 +182,7 @@ spec = do
                        \ 3 | 4 | 5 \n\
                        \---+---+---\n\
                        \ 6 | 7 | 8 "
-      let game = Game board newGame
+      let game = Components board newGame
       let output = logTestFixture (displayGame game) writeFixture
       shouldBe output (gameString ++ "\n")
 
@@ -194,7 +194,7 @@ spec = do
 
   describe "displayGameBegin" $ do
     it "displays the game begin message and empty board" $ do
-      let game = Game board newGame
+      let game = Components board newGame
       let gameBegin = "\nGAME BEGIN"
       let gameString = " 0 | 1 | 2 \n\
                        \---+---+---\n\
