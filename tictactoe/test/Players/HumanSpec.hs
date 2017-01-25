@@ -52,7 +52,6 @@ spec = do
       shouldBe output "That space is already occupied\n"
       shouldBe input False
 
-
     it "returns False and displays error if user input is an occupied space" $ do
       let game = Components board newGame
       let (input, output) = evalTestFixture (isValid (Just 9) game) ioFixture

@@ -13,7 +13,7 @@ data BoardData = Rows {
                  } deriving (Show)
 
 boardSpaces :: BoardData -> [Int]
-boardSpaces (Rows dim) = take spaces [0..] 
+boardSpaces (Rows dim) = take spaces [0..]
                        where spaces = dim ^ 2
 
 boardRows :: BoardData -> [[Int]]

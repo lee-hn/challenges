@@ -34,7 +34,7 @@ spec = do
     it "adds the new move to the end of the move list" $ do
       let oldGameState = GameState [3]
       let newGameState = GameState [3, 4]
-      shouldBe (addMove 4 oldGameState) newGameState 
+      shouldBe (addMove 4 oldGameState) newGameState
 
   describe "lastPlayer" $ do
     it "returns Nothing if there are no moves" $ do

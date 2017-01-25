@@ -32,12 +32,12 @@ import Players.Player
       PlayerClass
     , makeMove
     )
-import UI.UI ( MonadUI )
 import UI.Console.Messages (
       displayOutcome
     , displayTurn
     , displayGame
     )
+import UI.UI ( MonadUI )
 
 runGame :: (MonadUI monad, PlayerClass one, PlayerClass two) => GameData -> (PlayerData one two) -> monad ()
 runGame game players
