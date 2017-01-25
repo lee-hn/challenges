@@ -16,6 +16,8 @@ module UI.UI
     , displayTitle
     , displayGameBegin
     , displayGameOver
+    , displayGoodbye
+    , promptForNewGame
     ) where
 
 import Components.Rules
@@ -38,7 +40,7 @@ import Components.Board
     )
 import UI.Errors
     (
-      ErrorData(InvalidSpaceError, OccupiedSpaceError, NotANumberError, PlayerOrderError)
+      ErrorData(InvalidSpaceError, OccupiedSpaceError, NotANumberError, InvalidResponseError)
     )
 import Data.List
 import Data.List.Split
@@ -74,10 +76,10 @@ promptForMove = do
 promptForPlayerOrder :: MonadUI monad => monad Int
 promptForPlayerOrder = do
     order <- (displayPrompt "Do you want to play first or second? Please enter 1 or 2")
-    if length order > 0 && isInfixOf order "12"
+    if length order == 1 && isInfixOf order "12"
         then return (read order :: Int)
         else do
-            displayError PlayerOrderError
+            displayError InvalidResponseError
             promptForPlayerOrder
 
 displayError :: MonadUI monad => ErrorData -> monad ()
@@ -85,7 +87,7 @@ displayError error
     | error == InvalidSpaceError = displayMessage "That space does not exist on the board"
     | error == OccupiedSpaceError = displayMessage "That space is already occupied"
     | error == NotANumberError = displayMessage "That is not a number"
-    | error == PlayerOrderError = displayMessage "That is not a valid response"
+    | error == InvalidResponseError = displayMessage "That is not a valid response"
 
 displayOutcome :: MonadUI monad => OutcomeData -> monad ()
 displayOutcome outcome
@@ -123,6 +125,20 @@ displayGameBegin :: MonadUI monad => GameData -> monad ()
 displayGameBegin game = do
     displayMessage "\nGAME BEGIN"
     displayGame game
+    displayMessage "Player 1 = X | Player 2 = O"
 
 displayGameOver :: MonadUI monad => monad ()
 displayGameOver = displayMessage "GAME OVER"
+
+displayGoodbye :: MonadUI monad => monad ()
+displayGoodbye = displayMessage "\nGoodbye!"
+
+promptForNewGame :: MonadUI monad => monad String
+promptForNewGame = do
+    playAgain <- (displayPrompt "Do you want to play again? Please enter Y or N")
+    let response = map toUpper playAgain
+    if length response == 1 && isInfixOf response "YN"
+        then return response
+        else do
+            displayError InvalidResponseError
+            promptForNewGame

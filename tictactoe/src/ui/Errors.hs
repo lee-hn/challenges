@@ -1,10 +1,10 @@
 module UI.Errors
   (
-    ErrorData(InvalidSpaceError, OccupiedSpaceError, NotANumberError, PlayerOrderError)
+    ErrorData(InvalidSpaceError, OccupiedSpaceError, NotANumberError, InvalidResponseError)
   ) where
 
 data ErrorData = InvalidSpaceError
                | OccupiedSpaceError
                | NotANumberError
-               | PlayerOrderError
+               | InvalidResponseError
                deriving (Show, Eq, Enum)

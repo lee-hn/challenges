@@ -4,7 +4,7 @@ module UI.UISpec where
 
 import Test.Hspec
 import UI.UI
-import UI.Errors ( ErrorData(InvalidSpaceError, OccupiedSpaceError, NotANumberError, PlayerOrderError) )
+import UI.Errors ( ErrorData(InvalidSpaceError, OccupiedSpaceError, NotANumberError, InvalidResponseError) )
 import Components.Board ( BoardData(Rows) )
 import Components.Moves ( MovesData(GameState) )
 import Components.Rules
@@ -119,9 +119,9 @@ spec = do
       let output = logTestFixture (displayError NotANumberError) writeFixture
       shouldBe output errorMessage
 
-    it "sends player order error message to output" $ do
+    it "sends invalid response error message to output" $ do
       let errorMessage = "That is not a valid response\n"
-      let output = logTestFixture (displayError PlayerOrderError) writeFixture
+      let output = logTestFixture (displayError InvalidResponseError) writeFixture
       shouldBe output errorMessage
 
   describe "displayOutcome" $ do
@@ -195,18 +195,64 @@ spec = do
   describe "displayGameBegin" $ do
     it "displays the game begin message and empty board" $ do
       let game = Game board newGame
-      let message = "\nGAME BEGIN"
+      let gameBegin = "\nGAME BEGIN"
       let gameString = " 0 | 1 | 2 \n\
                        \---+---+---\n\
                        \ 3 | 4 | 5 \n\
                        \---+---+---\n\
                        \ 6 | 7 | 8 "
+      let playerMarkers = "Player 1 = X | Player 2 = O"
       let output = logTestFixture (displayGameBegin game) writeFixture
-      shouldBe output (message ++ "\n" ++ gameString ++ "\n")
+      shouldBe output $ gameBegin ++ "\n"
+                     ++ gameString ++ "\n"
+                     ++ playerMarkers ++ "\n"
 
   describe "displayGameOver" $ do
     it "displays the game over message" $ do
       let message = "GAME OVER"
       let output = logTestFixture displayGameOver writeFixture
       shouldBe output (message ++ "\n")
+
+  describe "displayGoodbye" $ do
+    it "displays the goodbye message" $ do
+      let message = "\nGoodbye!"
+      let output = logTestFixture displayGoodbye writeFixture
+      shouldBe output (message ++ "\n")
+
+  describe "promptForNewGame" $ do
+    it "sends new game prompt to output and receives Y as input" $ do
+      let fixture = def {
+          _writeLine = \line -> tell line
+        , _readLine = return "Y"
+      }
+      let (input, output) = evalTestFixture promptForNewGame fixture
+      shouldBe output "Do you want to play again? Please enter Y or N\n"
+      shouldBe input "Y"
+
+    it "sends new game prompt to output and receives N as input" $ do
+      let fixture = def {
+          _writeLine = \line -> tell line
+        , _readLine = return "N"
+      }
+      let (input, output) = evalTestFixture promptForNewGame fixture
+      shouldBe output "Do you want to play again? Please enter Y or N\n"
+      shouldBe input "N"
+
+    it "accepts lower case y as input" $ do
+      let fixture = def {
+          _writeLine = \line -> tell line
+        , _readLine = return "y"
+      }
+      let (input, output) = evalTestFixture promptForNewGame fixture
+      shouldBe output "Do you want to play again? Please enter Y or N\n"
+      shouldBe input "Y"
+
+    it "accepts lower case n as input" $ do
+      let fixture = def {
+          _writeLine = \line -> tell line
+        , _readLine = return "n"
+      }
+      let (input, output) = evalTestFixture promptForNewGame fixture
+      shouldBe output "Do you want to play again? Please enter Y or N\n"
+      shouldBe input "N"
 

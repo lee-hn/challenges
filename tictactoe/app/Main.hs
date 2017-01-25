@@ -14,17 +14,19 @@ import UI.UI
     , displayTitle
     , displayGameBegin
     , displayGameOver
+    , promptForNewGame
+    , displayGoodbye
     )
 
 main :: IO ()
 main = do
+    displayTitle
+
     let board = Rows 3
     let newGame = GameState []
     let game = Game board newGame
     let computerFirst = Players ComputerPlayer HumanPlayer
     let humanFirst = Players HumanPlayer ComputerPlayer
-
-    displayTitle
 
     order <- promptForPlayerOrder
 
@@ -35,3 +37,9 @@ main = do
       2 -> runGame game computerFirst
 
     displayGameOver
+
+    playAgain <- promptForNewGame
+
+    if playAgain == "Y"
+        then main
+        else displayGoodbye

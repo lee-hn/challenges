@@ -13,7 +13,6 @@ import UI.UI
     , promptForPlayerOrder
     , displayError
     )
-import UI.Errors ( ErrorData(PlayerOrderError) )
 import Players.Human ( HumanPlayerData(HumanPlayer) )
 import Players.Computer ( ComputerPlayerData(ComputerPlayer) )
 
