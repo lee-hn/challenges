@@ -7,14 +7,17 @@ import Game ( runGame )
 import Settings ( PlayerData(Players) )
 import Players.Computer ( ComputerPlayerData(ComputerPlayer) )
 import Players.Human ( HumanPlayerData(HumanPlayer) )
-import UI.UI
+import UI.Console.Prompts
     (
       promptForPlayerOrder
-    , displayGame
+    , promptForNewGame
+    )
+import UI.Console.Messages
+    (
+      displayGame
     , displayTitle
     , displayGameBegin
     , displayGameOver
-    , promptForNewGame
     , displayGoodbye
     )
 

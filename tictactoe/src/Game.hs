@@ -32,11 +32,10 @@ import Players.Player
       PlayerClass
     , makeMove
     )
-import UI.UI
-    (
-      MonadUI
-    , displayMessage
-    , displayOutcome
+import UI.UI ( MonadUI )
+import UI.Console.Messages (
+      displayOutcome
+    , displayTurn
     , displayGame
     )
 
@@ -47,7 +46,7 @@ runGame game players
         let updatedMoves = addMove newMove moves
         let updatedGame = Components board updatedMoves
         let turnNumber = show $ length $ allMoves updatedMoves
-        displayMessage $ "\nTurn " ++ turnNumber ++ ":"
+        displayTurn turnNumber
         displayGame updatedGame
         runGame updatedGame players
     | otherwise = endGame $ outcome game

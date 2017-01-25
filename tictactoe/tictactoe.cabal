@@ -26,6 +26,10 @@ library
                      , Players.Human
                      , UI.UI
                      , UI.Errors
+                     , UI.Console.Base
+                     , UI.Console.Prompts
+                     , UI.Console.Messages
+                     , UI.Console.Render
   build-depends:       base >= 4.7 && < 5
                      , mtl
                      , random
