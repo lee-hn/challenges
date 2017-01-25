@@ -53,9 +53,12 @@ possibleMoves game
         moves = allMoves $ movesData game
 
 scorePossibleMoves :: GameData -> [(Int, Int)]
-scorePossibleMoves game = zip spaces scores
+scorePossibleMoves game
+    | length spaces == 9 = zip spaces (replicate 9 0)
+    | otherwise = do
+        let scores = map (\move -> scoreMove move game) spaces
+        zip spaces scores
   where spaces = possibleMoves game
-        scores = map (\move -> scoreMove move game) spaces
 
 chooseBestMove :: [(Int, Int)] -> (Int, Int)
 chooseBestMove moveScores
